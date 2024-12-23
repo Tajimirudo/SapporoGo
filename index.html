@@ -2,3 +2,18 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mini-tokyo-3d@latest/dist/mini-tokyo-3d.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/mini-tokyo-3d@latest/dist/mini-tokyo-3d.min.js"></script>
 </head>
+<body>
+  <div id="mini-tokyo-3d" style="width: 400px; height: 400px;"></div>
+
+  <script>
+    const options = {
+      container: 'mini-tokyo-3d',
+      accessToken: '<Mapbox アクセストークン>',
+      secrets: {
+        odpt: '<公共交通オープンデータセンターアクセストークン>',
+        challenge2024: '<公共交通オープンデータチャレンジ2024アクセストークン>'
+      }
+    };
+    const map = new mt3d.Map(options);
+  </script>
+</body>
