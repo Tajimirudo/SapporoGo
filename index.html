@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>地図表示</title>
+
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css" rel="stylesheet" />
+
+<style>
+    html { height: 100% }
+    body { height: 100% }
+    #map { height: 100%; width: 100%}
+</style>
+</head>
+
+<body>
+<div id='map'></div>
+
+<script>
+    mapboxgl.accessToken = pk.eyJ1IjoiY2VsZXJvbjEyMSIsImEiOiJjbTUyaG92MHMxbWtqMnFyMG9oM2UyZzd3In0.603bTGd0nYNxcEYy3Ha8BA;
+
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [139.7670516, 35.6811673],
+        zoom: 15
+    });
+    // 位置情報の取得に成功した時の処理
+    function success(position) {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+
+        // マーカーを作成し、地図に追加
+        new mapboxgl.Marker({color:'pink'})
+            .setLngLat([longitude, latitude])
+            .addTo(map);
+
+        // 地図の中心をユーザーの現在位置に移動
+        map.flyTo({
+            center: [longitude, latitude],
+            zoom: 15
+        });
+    }
+
+    // 位置情報の取得に失敗した時の処理
+    function error() {
+        alert('位置情報の取得に失敗しました。');
+    }
+
+    // ユーザーの位置情報を取得
+    if ('geolocation' in navigator) {
+        navigator.geolocation.getCurrentPosition(success, error);
+    } else {
+        alert('お使いのブラウザでは、位置情報の取得がサポートされていません。');
+    }
+</script>
+
+</body>
+</html>
